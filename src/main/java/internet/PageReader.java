@@ -28,7 +28,7 @@ public class PageReader
 
             URL url1 = new URL(url);
             URLConnection connection = url1.openConnection();
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.3; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
 
             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         }

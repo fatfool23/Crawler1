@@ -3,6 +3,9 @@ package main;
 import datamanipulation.UrlFinder;
 import internet.PageReader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *  driver class
  *
@@ -13,10 +16,12 @@ public class Main
 
     public static void main(String[] args)
     {
-        String s = "https://www.amazon.com"; //"https://en.wikipedia.org/wiki/Christmas_market";
-        PageReader pageReader = new PageReader(s);
-        //new UrlFinder().dumpPage(pageReader.getReader());
-        new UrlFinder().getUrls(pageReader.getReader());
+        String s = "https://en.wikipedia.org/wiki/Christmas_market";
+        //new UrlFinder().dumpPage(new PageReader(s).getReader());
+        UrlFinder urlFinder = new UrlFinder(s);
+        List<String> links = urlFinder.getUrls(new PageReader(s).getReader());
+        urlFinder.dumpRebuiltUrls(urlFinder.rebuildUrls(links));
+
     }
 
 
