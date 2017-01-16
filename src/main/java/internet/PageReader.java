@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * class creates objects that link to a web page and provides a way to read data from that page.
@@ -15,6 +17,7 @@ import java.net.URLConnection;
 public class PageReader
 {
     private BufferedReader reader;
+    private List<String> rawHTML = new ArrayList<>();
 
     /**
      * constructor for the PageReader object
@@ -51,9 +54,37 @@ public class PageReader
      * @return BufferedReader object to get content from page.
      */
 
+
     public BufferedReader getReader()
     {
         return reader;
+    }
+
+    /**
+     * the purpose of this method is to provide the raw HTML source code to all the other classes in
+     * order to minimize how many times content from the page is read
+     * @return a list of strings containing all of the HTML source code of a given (in the constructor) page.
+     */
+
+    public List<String> getRawHTML()
+    {
+        List<String> result = new ArrayList<>();
+        try
+        {
+            BufferedReader reader = this.getReader();
+            String s = reader.readLine();
+            while(s != null)
+            {
+                result.add(s);
+                s = reader.readLine();
+            }
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("unable to read from url");
+        }
+        rawHTML = result;
+        return rawHTML;
     }
 
 }
